@@ -6,7 +6,17 @@
 <body>
   <h1>Airship Test</h1>
   <p>This is a test for web push notifications.</p>
-  <script type="text/javascript" src="push-worker.js"></script>
+  <script type="text/javascript">if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/push-worker.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}</script>
   <script type="text/javascript">
 // 86acbd31cd7c09cf30acb66d2fbedc91daa48b86:1610685465.3015609
 !function(n,r,e,t,c){var i,o="Promise"in n,u={then:function(){return u},catch:function(n){
